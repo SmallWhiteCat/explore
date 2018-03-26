@@ -1,0 +1,77 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        if nums == []:
+            return []  
+        if len(nums) == 1:
+            return nums
+        def toBSF(nums):
+            half = len(nums)//2
+            print(half)
+            root = TreeNode(nums[half])
+            if half == 1:
+                left = TreeNode(nums[0])
+                if len(nums) == 2:
+                    right = TreeNode(None)
+                else:
+                    right = TreeNode(nums[-1])
+                root.left = left
+                root.right = right
+            return root, half
+        root, half = toBSF(nums)
+        
+        left, half_left = toBSF(nums[:half])
+        if half+1 <= len(nums)-1:
+            print('nums', len(nums), 'half', half)
+            right, half_right = toBSF(nums[half+1:])
+            
+        root.left = left
+        if half+1 <= len(nums)-1:
+            print('nums', len(nums), 'half', half)
+            root.right = right
+            
+        vals = self.levelOrder(root)
+        val = []
+        for i in vals:
+            val.extend(i)
+        if val[-1] == None:
+            return val[:-1]
+        return val
+        
+            
+        
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if root == None:
+            return []
+        node = [[root]]
+        vals = [[root.val]]
+        while node:
+            cur_node = node.pop()
+            val, temp = [], []
+            for cur in cur_node:
+                if cur.left:
+                    val.append(cur.left.val)
+                    temp.append(cur.left)              
+                if cur.right:
+                    val.append(cur.right.val)
+                    temp.append(cur.right)
+            if temp:
+                node.append(temp)
+                vals.append(val)
+        return vals
+            
+            
