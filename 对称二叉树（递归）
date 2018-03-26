@@ -1,0 +1,31 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:    
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if root == None:
+            return True
+        return self.isMirror(root.left, root.right)
+    def isMirror(self, left, right):
+        if not left and not right:
+            return True
+        if not left or not right:
+            return False
+        if left.val == right.val:
+            print(left.val, right.val)
+            ll_rr = self.isMirror(left.left, right.right) 
+            lr_rl = self.isMirror(left.right, right.left) 
+            return ll_rr and lr_rl
+        else:
+            return False
+    
+    
+        
