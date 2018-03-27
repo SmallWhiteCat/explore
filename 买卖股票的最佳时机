@@ -1,0 +1,23 @@
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if len(prices) <=1:
+            return 0
+        
+        buy = [prices[0]]
+        sell = [0]
+        days = len(prices)   
+        max_profit = 0
+        cur = 0
+        for i in range(1, days):
+            if prices[i] < buy[-1]: 
+                buy.append(prices[i])
+            elif prices[i] > sell[-1]:
+                sell.append(prices[i])
+                max_profit = sell[-1] - buy[-1]
+            elif prices[i] - buy[-1] > max_profit:
+                max_profit = prices[i] - buy[-1]
+        return max_profit
