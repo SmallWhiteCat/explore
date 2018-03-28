@@ -1,0 +1,41 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 1:
+            return nums[0]
+        
+        max_num = nums[0]
+        l = len(nums)
+        total = nums[0]
+        left, right = 0, 0
+        for i in range(1, l):
+            if nums[i] > max_num:
+                max_num = nums[i]
+            if total <= 0:
+                total = 0
+                left = i
+            total += nums[i]
+        total = 0  
+        for i in range(l-1, left-1, -1):
+            total += nums[i]
+            print(total)
+            if total <= 0:
+                total = 0
+                right = i
+        if not left and not right:
+            sub_array = sum(nums)
+        elif not right:
+            sub_array = sum(nums[left:])
+        else:
+            sub_array = sum(nums[left:right])
+        print(left, right)
+        print(sub_array, max_num)
+        if max_num < 0:
+            return max_num
+        return max(sub_array, max_num)
+            
+            
+                
