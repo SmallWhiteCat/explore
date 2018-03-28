@@ -1,0 +1,41 @@
+class Solution:
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """ 
+        if x+y == 0:
+            return 0
+        elif x == 0:  
+            return sum(self.ham(y))
+        elif y == 0:  
+            return sum(self.ham(x))
+        elif x+y == 1:
+            return 1
+        ham_x = self.ham(x)
+        ham_y = self.ham(y)
+        l_x, l_y = len(ham_x), len(ham_y)
+        w = 0
+        l = min(l_x, l_y)
+        for i in range(l):
+            if ham_x[l_x-1-i] + ham_y[l_y-1-i] == 1:
+                w += 1
+        if l_x == l_y:
+            return w
+        if l == l_x:
+            return w + sum(ham_y[:l_y-l])
+        else:
+            return w + sum(ham_x[:l_x-l])
+    def ham(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:
+            return 0
+        arr = []
+        while n:   
+            arr.append(n % 2)
+            n //= 2
+        return arr[::-1]
