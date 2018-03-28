@@ -1,0 +1,26 @@
+class Solution:
+    # @param n, an integer
+    # @return an integer
+    def reverseBits(self, n):
+        if n == 0:
+            return 0
+        forward = self.ham(n)
+        add = [0]*(32-len(forward))
+        add.extend(forward)
+        add_fw = map(str, add)      
+        back_fw = ''.join(add_fw[::-1])
+        return int(back_fw, 2)
+       
+    def ham(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:
+            return 0
+        arr = []
+        while n:   
+            arr.append(n % 2)
+            n //= 2
+        return arr[::-1]
+     
