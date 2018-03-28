@@ -1,0 +1,21 @@
+class Solution:
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums :
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        pre = nums[0]
+        cur = max(pre, nums[1])
+        num = len(nums)
+        for i in range(2, num):
+            if pre+nums[i] >= cur:
+                pre, cur = cur, pre+nums[i]
+            else:
+                pre = cur
+        return cur
+                
