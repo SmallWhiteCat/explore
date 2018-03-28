@@ -1,0 +1,28 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 1:
+            return nums[0]
+        
+        max_sub = 0
+        cur_sub = 0
+        num = len(nums)
+        max_num = nums[0]
+        for i in range(num):
+            if nums[i] > max_num:
+                max_num = nums[i]
+            
+            cur_sub += nums[i]
+            if cur_sub < 0:
+                cur_sub = 0
+            
+            if cur_sub > max_sub:
+                max_sub = cur_sub
+            
+        if max_num < 0:
+            return max_num
+        return max_sub
+                
