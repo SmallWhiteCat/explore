@@ -1,0 +1,15 @@
+class Solution:
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n <= 2:
+            return 0
+        prime = [0]*n
+        l = int(n**0.5)
+        for i in range(2, l+1):
+            if prime[i]:
+                continue
+            prime[i*i:n:i] = [1]*len(prime[i*i:n:i])
+        return len(prime) - sum(prime) -2
