@@ -1,0 +1,17 @@
+class Solution:
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        prime = [True]*max(n, 2)
+        prime[0], prime[1] = False, False
+        x = 2
+        while x*x < n:
+            p = x*x
+            while p < n:
+                prime[p] = False
+                p += x
+            x += 1
+        return sum(prime)
+                
