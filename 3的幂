@@ -1,0 +1,19 @@
+class Solution:
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        if n < 1:
+            return False
+        if n == 1:
+            return True
+        return self.three(3, n)
+    
+    def three(self, cur, n):
+        if cur == n:
+            return True
+        if cur < n:
+            return self.three(cur*3, n)
+        else:
+            return False
