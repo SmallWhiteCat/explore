@@ -1,0 +1,28 @@
+class Solution:
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n <= 1:
+            return 0
+        prime = []
+        pri_doub = []
+        k = 0
+        run_num = 0
+        for i in range(2, n):
+            if i not in  pri_doub:
+                run_num += 1
+                for j in range(2, i//2):
+                    if i % j == 0:
+                        k = 1          
+                if k == 0:
+                    prime.append(i)
+                    double = 2
+                    while prime[-1]*double < n:
+                        if prime[-1]*double not in prime:
+                            pri_doub.append(prime[-1]*double)
+                        double += 1
+        print(run_num)
+        return len(prime)
+                
