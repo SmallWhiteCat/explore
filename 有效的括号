@@ -4,6 +4,8 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        if not s:
+            return True
         dic = {')': '(', ']': '[', '}': '{'}    
         if len(s) % 2 == 1 or s[0] in dic.keys():
             return False
